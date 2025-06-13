@@ -35,10 +35,6 @@
         var pageToc = [
           {title: "signup", url: "#_top", children: [
           ]},
-          {title: "PUUTTUU serverles.yml m\u00e4\u00e4ritys", url: "#puuttuu-serverlesyml-maaritys", children: [
-          ]},
-          {title: "login", url: "#login", children: [
-          ]},
         ];
 
     </script>
@@ -57,31 +53,62 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h2 id="signup">signup</h2>
-<h2 id="puuttuu-serverlesyml-maaritys">PUUTTUU serverles.yml määritys</h2>
 <pre><code>requests/
 └── user/
     └── post_signup.rest
 </code></pre>
-<pre><code>POST https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/user/signup
-Content-Type: application/json
+<h4 id="serverlessyml">serverless.yml</h4>
+<p><code>functions:</code></p>
+<pre><code>  signupUser:
+    handler: user/signup.handler
+    events:
+      - httpApi:
+          path: /user/signup
+          method: post
+``
 
-{
-  &quot;email&quot;: &quot;AA4598@student.jamk.fi&quot;,
-  &quot;password&quot;: &quot;topsecret&quot;,
-  &quot;name&quot;: &quot;Timo Laakkonen&quot;  
-}
+
 </code></pre>
-<p><strong>On success</strong>
-<img src="../../img2/signup_test.png" alt="image 1" width="800" style="display: block; margin: 0;"/></p>
-<p><code>Amazon Cognito &gt; User pools &gt; serverless-auth-pool &gt; Users</code>
-<img src="../../img2/users.png" alt="image 1" width="800" style="display: block; margin: 0;"/></p>
-<p><strong>On failure</strong>
-<img src="../../img2/signup_test_error.png" alt="image 1" width="800" style="display: block; margin: 0;"/></p>
-<h2 id="login">login</h2>
-<pre><code>requests/
+<p>POST https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/user/signup
+Content-Type: application/json</p>
+<p>{
+  "email": "AA4598@student.jamk.fi",
+  "password": "topsecret",
+  "name": "Timo Laakkonen"<br />
+}</p>
+<pre><code>**On success**
+&lt;img src=&quot;../../img2/signup_test.png&quot; alt=&quot;image 1&quot; width=&quot;800&quot; style=&quot;display: block; margin: 0;&quot;/&gt;
+
+```Amazon Cognito &gt; User pools &gt; serverless-auth-pool &gt; Users```
+&lt;img src=&quot;../../img2/users.png&quot; alt=&quot;image 1&quot; width=&quot;800&quot; style=&quot;display: block; margin: 0;&quot;/&gt;
+
+**On failure**
+&lt;img src=&quot;../../img2/signup_test_error.png&quot; alt=&quot;image 1&quot; width=&quot;800&quot; style=&quot;display: block; margin: 0;&quot;/&gt;
+
+
+</code></pre>
+<p>sls logs -f signupUser</p>
+<pre><code>
+&lt;img src=&quot;../../img2/signup_logs.png&quot; alt=&quot;image 1&quot; width=&quot;800&quot; style=&quot;display: block; margin: 0;&quot;/&gt;
+
+## login
+
+</code></pre>
+<p>requests/
 └── user/
-    └── post_login.rest
+    └── post_login.rest</p>
+<pre><code>
+#### serverless.yml
+
+`functions:`
 </code></pre>
+<p>loginUser:
+    handler: user/login.handler
+    events:
+      - httpApi:
+          path: /user/login
+          method: post
+``</p>
 <pre><code>POST https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/user/login
 Content-Type: application/json
 

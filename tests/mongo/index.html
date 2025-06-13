@@ -35,8 +35,6 @@
         var pageToc = [
           {title: "Get dates", url: "#_top", children: [
           ]},
-          {title: "PUUTTUU serverles.yml m\u00e4\u00e4ritys", url: "#puuttuu-serverlesyml-maaritys", children: [
-          ]},
           {title: "Get images", url: "#get-images", children: [
           ]},
         ];
@@ -57,11 +55,18 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h2 id="get-dates">Get dates</h2>
-<h2 id="puuttuu-serverlesyml-maaritys">PUUTTUU serverles.yml määritys</h2>
 <p>Get NDVI-image dates from Mongodb Atlas service.</p>
 <pre><code>requests/
 └── mongo/
     └── get_dates.rest
+</code></pre>
+<p><code>functions:</code></p>
+<pre><code>get_mongo_dates:
+    handler: mongo/lambda/getdates.handler
+    events:
+      - httpApi:
+          path: /mongo/getdates
+          method: post
 </code></pre>
 <pre><code>POST https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/mongo/getdates
 Content-Type: application/json
@@ -116,12 +121,22 @@ Content-Type: application/json
   }
 }
 </code></pre>
+<pre><code>sls logs -f funktionnimi
+</code></pre>
 <p><strong>On success</strong>
 <img src="../../img2/mongo_getdates_test.png" alt="image 1" width="800" style="display: block; margin: 0;"/></p>
 <h2 id="get-images">Get images</h2>
 <pre><code>requests/
 └── mongo/
     └── get_images.rest
+</code></pre>
+<p><code>functions:</code></p>
+<pre><code>get_mongo_allimages:
+    handler: mongo/lambda/getimages.handler
+    events:
+      - httpApi:
+          path: /mongo/getimages
+          method: post
 </code></pre>
 <pre><code>POST https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/mongo/getimages
 Content-Type: application/json

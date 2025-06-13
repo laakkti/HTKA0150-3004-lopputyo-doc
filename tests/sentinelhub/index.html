@@ -64,6 +64,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 └── sentinelhub/
     └── get_sentinelhub_token.rest
 </code></pre>
+<p><code>functions:</code></p>
+<pre><code>get_sentinelhub_token:
+    handler: sentinelhub/lambda/get_token.handler
+    events:
+    - httpApi:
+        path: /sentinelhub/get_token
+        method: post
+</code></pre>
 <pre><code>POST https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/sentinelhub/get_token
 </code></pre>
 <p><strong>On success</strong>
@@ -72,6 +80,15 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <pre><code>requests/
 └── sentinelhub/
     └── get_statistics.rest
+</code></pre>
+<p><code>functions:</code></p>
+<pre><code>get_sentinelhub_statistics:
+    handler: sentinelhub/lambda/get_statistics.handler
+    timeout: 60
+    events:
+      - httpApi:
+          path: /sentinelhub/get_statistics
+          method: post
 </code></pre>
 <pre><code>POST https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/sentinelhub/get_statistics
 Content-Type: application/json
@@ -135,6 +152,15 @@ Content-Type: application/json
 <pre><code>requests/
 └── sentinelhub/
     └── get_image.rest
+</code></pre>
+<p><code>functions:</code></p>
+<pre><code>get_sentinelhub_image:
+    handler: sentinelhub/lambda/get_image.handler
+    timeout: 30
+    events:
+      - httpApi:
+          path: /sentinelhub/getimage
+          method: post
 </code></pre>
 <p>POST https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/sentinelhub/getimage
 Content-Type: application/json</p>

@@ -27,6 +27,8 @@
       var is_top_frame = false;
         
         var pageToc = [
+          {title: "SentinelHub token-based authentication", url: "#_top", children: [
+          ]},
         ];
 
     </script>
@@ -39,7 +41,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
 <a name="_top"></a>
 <h4 id="dates">dates</h4>
-<p>This connection is websocket connection. While getting data the situation/phases of the process is posted by websocket</p>
+<p>This connection is websocket connection. While getting data the situation/phases of the process is sent by websocket</p>
 <p>Retrieves/returns a list of Sentinel-hub NDVI dates with statistics and updates the database if new data is available.</p>
 <p>List the days with found images for the given geometry found in Sentinel Hub. Service should store the given geometry and the days in which the images can be found so that there would be no need to re-query the days (only newer days from the last query should be queried) every time from Sentinel Hub. If the image is available for given day then the service should assign unique id "sentinelid" for that day and image.</p>
 <p>Tämä kokonaisuudessaan tekee muutakin kuin vain palauttaa tiedot, hakeee sentinelistä ja tallentaa tietokantaan niin ei tarvitse jatkossa enää hakea ja käyttää sentnelhubin process ja request units.</p>
@@ -67,7 +69,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       - websocket:
           route: getNdviDates
 </code></pre>
-<p>timeout is most important, depending of the size of the aoi (area of interenst) geometry, timerange and traffic so need to be enough time for the process</p>
+<p>timeout is most important, depending of the size of the aoi (area of interenst) geometry, depending on timerange and traffic enough time is needed for the process.</p>
 <h6 id="tama-lahetetaan-fronendista-ja-funktio-on-getndvi">############################### tämä lähetetään fronendistä ja funktio on getNdvi...</h6>
 <p>on client</p>
 <p>const geoData = {
@@ -235,6 +237,35 @@ socket.send(JSON.stringify({ action: "getNdviDates", data: geoData }));</p>
         SentinelHub--&gt;&gt;AWS: Response (image data)
         AWS-&gt;&gt;MongoDB: Store image data with statistics
     end
+</div>
+<h2 id="sentinelhub-token-based-authentication">SentinelHub token-based authentication</h2>
+<p>For use of sentinelHub-service needs autentication token</p>
+<p>sentinekhub token pitää ottaa talteen sillä sitä ei voida kysellä joka requestin yhteydessä not allowed for...
+TÄMÄ LIITTYY dates websocket kohtaan SIIRRÄÄ sinne!!! koska siellä vain ollaan yhteydessä sentinelhubiin!!!!</p>
+<div class="mermaid">sequenceDiagram
+    participant Client as AWS:getNdviDates.handler
+    participant AuthFunction as sentinelhub_authentication
+    participant SSM as AWS:SSM
+    participant Check as checkToken
+    participant SHub as SentinelHub
+
+    Client-&gt;&gt;AuthFunction: Invoke sentinelhub_authentication()
+    AuthFunction-&gt;&gt;SSM: getParameter("sentinelhub_token")
+    alt Token exists
+        SSM--&gt;&gt;AuthFunction: Return token
+        AuthFunction-&gt;&gt;Check: checkToken(token)
+        Check--&gt;&gt;AuthFunction: Return expiration time
+        alt Token expiring soon (&lt;= 600s)
+            AuthFunction-&gt;&gt;SHub: authenticate(client_id, client_secret)
+            SHub--&gt;&gt;AuthFunction: Return newToken
+            AuthFunction-&gt;&gt;SSM: putParameter("sentinelhub_token", newToken)
+        end
+    else Token not found
+        AuthFunction-&gt;&gt;SHub: authenticate(client_id, client_secret)
+        SHub--&gt;&gt;AuthFunction: Return newToken
+        AuthFunction-&gt;&gt;SSM: putParameter("sentinelhub_token", newToken)
+    end
+    AuthFunction--&gt;&gt;Client: Return valid token
 </div>
 <br/>
 </div>
