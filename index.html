@@ -35,9 +35,7 @@
       var is_top_frame = (window === window.parent);
         
         var pageToc = [
-          {title: "NDVI-kasvillisuusindeksi", url: "#_top", children: [
-              {title: "API for NDVI-satellite images and statistics from Sentinel-hub services", url: "#api-for-ndvi-satellite-images-and-statistics-from-sentinel-hub-services" },
-              {title: "Oikean k\u00e4den s\u00e4\u00e4nt\u00f6 (Right-hand rule) \u2013 tiivistelm\u00e4", url: "#oikean-kaden-saanto-right-hand-rule-tiivistelma" },
+          {title: "NDVI (Normalized Difference Vegetation Index)", url: "#_top", children: [
           ]},
         ];
 
@@ -242,27 +240,26 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <h1 id="ndvi-kasvillisuusindeksi">NDVI-kasvillisuusindeksi</h1>
-<p>https://fi.wikipedia.org/wiki/NDVI</p>
-<p>Sovellus perustuu aikaisemmin totetutettuun (seuraavaan) sovellukseen
-frontend:
-https://laakkti.github.io/ytsp0300-3004/
-backend:
-https://laakkti.github.io/ytsp0200-3004/</p>
-<p>Tämä versio on yksinkertaistettu karsimalla joitakin toimintoja pois, tässä versiossa geometria (geoJson) syötetään (copy-paste)
-sovellukselle, joka tarkistaa oikeellisuuden ja korjaa tiettyjä virheitä automaattisesti, myös sen, että ns. "right-hand rule"<br />
-toteutuu.</p>
-<h2 id="api-for-ndvi-satellite-images-and-statistics-from-sentinel-hub-services">API for NDVI-satellite images and statistics from Sentinel-hub services</h2>
-<p>This RESTful API makes it possible to getting NDVI (Normalized Difference Vegetation Index) satellite data from sentinel-hub service sentinel-2-l1c and serve it for client.
-So the e.g. farmers and agriculture peoples can see the growing situation of the plants.</p>
-<h3 id="ndvi-normalized-difference-vegetation-index">NDVI (Normalized Difference Vegetation Index)</h3>
+    <h2 id="ndvi-normalized-difference-vegetation-index">NDVI (Normalized Difference Vegetation Index)</h2>
 <p>The well known and widely used NDVI is a simple, but effective index for quantifying green vegetation. It normalizes green leaf scattering in Near Infra-red wavelengths with chlorophyll absorption in red wavelengths.
 The value range of the NDVI is -1 to 1. Negative values of NDVI (values approaching -1) correspond to water. Values close to zero (-0.1 to 0.1) generally correspond to barren areas of rock, sand, or snow. Low, positive values represent shrub and grassland (approximately 0.2 to 0.4), while high values indicate temperate and tropical rainforests (values approaching 1). It is a good proxy for live green vegetation.</p>
 <p><img src="img/ndvi.jpg" alt="image 1" width="600"/></p>
-<h3 id="why-sentinel-hub">Why sentinel-hub</h3>
+<p><a href="https://fi.wikipedia.org/wiki/NDVI">https://fi.wikipedia.org/wiki/NDVI</a></p>
+<p>The application is based on a previously implemented the following application</p>
+<p>frontend: <br />
+https://laakkti.github.io/ytsp0300-3004/</p>
+<p>backend: <br />
+https://laakkti.github.io/ytsp0200-3004/</p>
+<p>Tämä versio on perusidealtaan yksinkertaistettu karsimalla joitakin toimintoja pois, tässä versiossa geometria (geoJson) syötetään (copy-paste)
+sovellukselle, joka tarkistaa oikeellisuuden ja korjaa tiettyjä virheitä automaattisesti, myös sen, että ns. "right-hand rule"<br />
+toteutuu.</p>
+<h4 id="api-for-ndvi-satellite-images-and-statistics-from-sentinel-hub-services">API for NDVI-satellite images and statistics from Sentinel-hub services</h4>
+<p>This RESTful API makes it possible to getting NDVI (Normalized Difference Vegetation Index) satellite data from sentinel-hub service sentinel-2-l1c and serve it for client.
+So the e.g. farmers and agriculture peoples can see the growing situation of the plants.</p>
+<h4 id="why-sentinel-hub">Why sentinel-hub</h4>
 <p><a href="https://medium.com/sentinel-hub/tk-why-its-time-to-stop-processing-satellite-imagery-on-your-laptop-a09dbf8c72c0/" target="_blank">Why it’s time to stop processing satellite imagery on your laptop</a></p>
-<p>tämä vois olla liittenä/käsitteinä (vai mikä se on TERMINOLOGIA) ja linkki siihen täältä</p>
-<h2 id="oikean-kaden-saanto-right-hand-rule-tiivistelma">Oikean käden sääntö (Right-hand rule) – tiivistelmä</h2>
+<p>tämä vois olla liittenä/käsitteinä (vai mikä se on TERMINOLOGIA) ja linkki siihen täältä
+<strong>Oikean käden sääntö (Right-hand rule)</strong></p>
 <p>Kun käsitellään <strong>Polygoneja ja MultiPolygoneja</strong> (esim. GeoJSON- tai shapefile-muodossa GIS-sovelluksissa), <strong>oikean käden sääntö</strong> määrittää koordinaattien kiertosuunnan:</p>
 <ul>
 <li>🔹 <strong>Ulkoreuna</strong> (polygonin ääriviiva) tulisi kiertää <strong>vastapäivään</strong> (CCW, <em>counterclockwise</em>).</li>
@@ -328,5 +325,5 @@ ettei tarvitse hakea joka kerta uudelleen, joka vie resureeseja sentinelhubista 
 </html>
 <!--
 MkDocs version : 1.6.0
-Build Date UTC : 2025-06-16 12:57:15.128244+00:00
+Build Date UTC : 2025-06-16 13:20:53.240865+00:00
 -->
