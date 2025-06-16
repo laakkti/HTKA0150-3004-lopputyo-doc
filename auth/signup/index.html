@@ -27,7 +27,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "signup", url: "#_top", children: [
+          {title: "Signup", url: "#_top", children: [
               {title: "Definition for serverless.yml", url: "#definition-for-serverlessyml" },
               {title: "Endpoint", url: "#endpoint" },
               {title: "Testing", url: "#testing" },
@@ -43,8 +43,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </script>
 <div class="container-fluid wm-page-content">
 <a name="_top"></a>
-<h2 id="signup">signup</h2>
-<p>Returns the jsonwebtoken with user name if authentication is succesful.</p>
+<h2 id="signup">Signup</h2>
 <pre><code>user/
 └── signup.js 
 </code></pre>
@@ -68,7 +67,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </div>
 <ol>
 <li>client requests for signup</li>
-<li>user data (email and password) is inserted into Cognito if email not already exists </li>
+<li>user data (name, email and password) is inserted into Cognito if email not already exists </li>
 <li>information of the successful is returned</li>
 <li>if insertion is successful status code 200 is returned to the client</li>
 <li>if insertion fails status code 500 is returned to the client</li>

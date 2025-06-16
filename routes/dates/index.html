@@ -27,7 +27,19 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "SentinelHub token-based authentication", url: "#_top", children: [
+          {title: "connect", url: "#_top", children: [
+          ]},
+          {title: "getNdviDates", url: "#getndvidates", children: [
+          ]},
+          {title: "SentinelHub token-based authentication", url: "#sentinelhub-token-based-authentication", children: [
+          ]},
+          {title: "Code locations", url: "#code-locations", children: [
+          ]},
+          {title: "Definition for serverless.yml", url: "#definition-for-serverlessyml", children: [
+          ]},
+          {title: "Request", url: "#request", children: [
+          ]},
+          {title: "Response", url: "#response", children: [
           ]},
         ];
 
@@ -40,130 +52,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </script>
 <div class="container-fluid wm-page-content">
 <a name="_top"></a>
-<h4 id="dates">dates</h4>
-<p>This connection is websocket connection. While getting data the situation/phases of the process is sent by websocket</p>
+<h4 id="dates">Dates</h4>
+<p>The connection method is WebSocket. The WebSocket connection is secured using a token during the connection process. 
+While getting data the situation/phases of the process is sent by websocket.</p>
 <p>Retrieves/returns a list of Sentinel-hub NDVI dates with statistics and updates the database if new data is available.</p>
-<p>List the days with found images for the given geometry found in Sentinel Hub. Service should store the given geometry and the days in which the images can be found so that there would be no need to re-query the days (only newer days from the last query should be queried) every time from Sentinel Hub. If the image is available for given day then the service should assign unique id "sentinelid" for that day and image.</p>
-<p>Tämä kokonaisuudessaan tekee muutakin kuin vain palauttaa tiedot, hakeee sentinelistä ja tallentaa tietokantaan niin ei tarvitse jatkossa enää hakea ja käyttää sentnelhubin process ja request units.</p>
-<pre><code>websocket/
-├── connect.js
-├── disconnect.js 
-└── getNdviDates.js
-</code></pre>
-<h4 id="serverlessyml">serverless.yml</h4>
-<p><code>functions:</code></p>
-<pre><code>  connect:
-    handler: websocket/connect.handler
-    events:
-      - websocket:
-          route: $connect
-  disconnect:
-    handler: websocket/disconnect.handler
-    events:
-      - websocket:
-          route: $disconnect
-  getNdviDates:
-    handler: websocket/getNdviDates.handler
-    timeout: 240
-    events:
-      - websocket:
-          route: getNdviDates
-</code></pre>
-<p>timeout is most important, depending of the size of the aoi (area of interenst) geometry, depending on timerange and traffic enough time is needed for the process.</p>
-<h6 id="tama-lahetetaan-fronendista-ja-funktio-on-getndvi">############################### tämä lähetetään fronendistä ja funktio on getNdvi...</h6>
-<p>on client</p>
-<p>const geoData = {
-    start_date: startDate,
-    end_date: endDate,
-    geometry: geoJson,
-  };
-socket.send(JSON.stringify({ action: "getNdviDates", data: geoData }));</p>
+<p>List the days with found images for the given geometry found in Sentinel Hub. Service should store the given geometry and the days in which the images can be found so that there would be no need to re-query the days (only newer days from the last query should be queried) every time from Sentinel Hub. If the image is available for given day then the service should assign unique id "sentinelid" for that day and image. </p>
 <h6 id="_1"></h6>
-<table>
-<thead>
-<tr>
-<th>Endpoint Url</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>wss://w2iuklgym6.execute-api.eu-north-1.amazonaws.com/dev</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Request</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>geometry</td>
-<td>geoJSON</td>
-<td>Geometry in geoJSON format, coordinate reference system WGS84 (EPSG:4326)</td>
-</tr>
-<tr>
-<td>start_date</td>
-<td>dateString (ISO 8601)</td>
-<td>The start date to include images from</td>
-</tr>
-<tr>
-<td>end_date</td>
-<td>dateString (ISO 8601)</td>
-<td>The end date to include images to</td>
-</tr>
-</tbody>
-</table>
-<pre><code>{   
-    "geometry": "geoJSON",
-    "start_date": "dateString",
-    "end_date": "dateString"
-}
-</code></pre>
-<p><strong>Response</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>array</td>
-<td>All the days from which images can be queried</td>
-</tr>
-<tr>
-<td>generationtime</td>
-<td>dateString (ISO 8601)</td>
-<td>The date of the image</td>
-</tr>
-<tr>
-<td>sentinelid</td>
-<td>string</td>
-<td>generationtime and geometry converted to sha256-format, generated for the request to be used when fetching the image from database e.g. 2023-05-30T00:00:00Z_c7a5478757abfae7286751b0950e58991fa3f6ef77f77e844baba038cb86b647</td>
-</tr>
-</tbody>
-</table>
-<pre><code class="language-json">[
-  {
-    "generationtime": "2023-05-15T00:00:00Z",
-    "sentinelid": "2023-05-15T00:00:00Z_c7a5478757abfae7286751b0950e58991fa3f6ef77f77e844baba..."
-  },
-  {
-    "generationtime": "2023-05-30T00:00:00Z",
-    "sentinelid": "2023-05-30T00:00:00Z_c7a5478757abfae7286751b0950e58991fa3f6ef77f77e844baba..."
-  },
-  ...
-]
-</code></pre>
-<p><strong>Sequence diagram</strong></p>
+<h2 id="connect">connect</h2>
+<p>During the connect function, a token is used to authenticate the WebSocket connection.</p>
 <div class="mermaid">sequenceDiagram
     Autonumber
     participant Client
@@ -185,6 +81,7 @@ socket.send(JSON.stringify({ action: "getNdviDates", data: geoData }));</p>
     deactivate AWS
 
 </div>
+<h2 id="getndvidates">getNdviDates</h2>
 <div class="mermaid">sequenceDiagram
     Autonumber
     participant Client
@@ -221,7 +118,6 @@ socket.send(JSON.stringify({ action: "getNdviDates", data: geoData }));</p>
 
 </div>
 <p>if new data (statistics) is available it will be stored into the database. Also NDVI-imagedata related to all new dates will be request from SentinelHub</p>
-<p><strong>Sequence diagram</strong></p>
 <div class="mermaid">sequenceDiagram
     Autonumber
     participant AWS as AWS: getNdviDates.handler
@@ -267,6 +163,126 @@ TÄMÄ LIITTYY dates websocket kohtaan SIIRRÄÄ sinne!!! koska siellä vain oll
     end
     AuthFunction--&gt;&gt;Client: Return valid token
 </div>
+<p>Tämä kokonaisuudessaan tekee muutakin kuin vain palauttaa tiedot, hakeee sentinelistä ja tallentaa tietokantaan niin ei tarvitse jatkossa enää hakea ja käyttää sentnelhubin process ja request units.</p>
+<h2 id="code-locations">Code locations</h2>
+<pre><code>websocket/
+├── connect.js
+├── disconnect.js 
+└── getNdviDates.js
+</code></pre>
+<h2 id="definition-for-serverlessyml">Definition for serverless.yml</h2>
+<p><code>functions:</code></p>
+<pre><code>  connect:
+    handler: websocket/connect.handler
+    events:
+      - websocket:
+          route: $connect
+  disconnect:
+    handler: websocket/disconnect.handler
+    events:
+      - websocket:
+          route: $disconnect
+  getNdviDates:
+    handler: websocket/getNdviDates.handler
+    timeout: 240
+    events:
+      - websocket:
+          route: getNdviDates
+</code></pre>
+<p>timeout is most important, depending of the size of the aoi (area of interenst) geometry, depending on timerange and traffic enough time is needed for the process.</p>
+<h6 id="tama-lahetetaan-fronendista-ja-funktio-on-getndvi">############################### tämä lähetetään fronendistä ja funktio on getNdvi...</h6>
+<p>on client</p>
+<p>const geoData = {
+    start_date: startDate,
+    end_date: endDate,
+    geometry: geoJson,
+  };
+socket.send(JSON.stringify({ action: "getNdviDates", data: geoData }));</p>
+<h6 id="_2"></h6>
+<table>
+<thead>
+<tr>
+<th>Endpoint Url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wss://w2iuklgym6.execute-api.eu-north-1.amazonaws.com/dev</td>
+</tr>
+</tbody>
+</table>
+<h2 id="request"><strong>Request</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>geometry</td>
+<td>geoJSON</td>
+<td>Geometry in geoJSON format, coordinate reference system WGS84 (EPSG:4326)</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>dateString (ISO 8601)</td>
+<td>The start date to include images from</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>dateString (ISO 8601)</td>
+<td>The end date to include images to</td>
+</tr>
+</tbody>
+</table>
+<pre><code>{   
+    "geometry": "geoJSON",
+    "start_date": "dateString",
+    "end_date": "dateString"
+}
+</code></pre>
+<h2 id="response"><strong>Response</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>array</td>
+<td>All the days from which images can be queried</td>
+</tr>
+<tr>
+<td>generationtime</td>
+<td>dateString (ISO 8601)</td>
+<td>The date of the image</td>
+</tr>
+<tr>
+<td>sentinelid</td>
+<td>string</td>
+<td>generationtime and geometry converted to sha256-format, generated for the request to be used when fetching the image from database e.g. 2023-05-30T00:00:00Z_c7a5478757abfae7286751b0950e58991fa3f6ef77f77e844baba038cb86b647</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">[
+  {
+    "generationtime": "2023-05-15T00:00:00Z",
+    "sentinelid": "2023-05-15T00:00:00Z_c7a5478757abfae7286751b0950e58991fa3f6ef77f77e844baba..."
+  },
+  {
+    "generationtime": "2023-05-30T00:00:00Z",
+    "sentinelid": "2023-05-30T00:00:00Z_c7a5478757abfae7286751b0950e58991fa3f6ef77f77e844baba..."
+  },
+  ...
+]
+</code></pre>
 <br/>
 </div>
 <footer class="container-fluid wm-page-content">

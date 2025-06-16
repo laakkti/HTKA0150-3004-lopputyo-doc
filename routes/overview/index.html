@@ -33,8 +33,6 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Database", url: "#_top", children: [
-          ]},
         ];
 
     </script>
@@ -52,9 +50,35 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <h1 id="database">Database</h1>
-<p>MongoDB Atlas as a service
-https://www.mongodb.com/products/platform/atlas-database</p>
+    <h4 id="endpoints">Endpoints</h4>
+<p><strong>endpoints:</strong>
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/user/login
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/user/signup
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/user/private
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/validategeojson
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/ndvi/getimages
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/sentinelhub/get_token
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/sentinelhub/get_statistics
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/sentinelhub/getimage
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/mongo/getdates
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/mongo/getimages
+  POST - https://vr6mgijfvf.execute-api.eu-north-1.amazonaws.com/mongo/getimage
+  wss://w2iuklgym6.execute-api.eu-north-1.amazonaws.com/dev</p>
+<p><strong>functions:</strong>
+  loginUser: ndvi-websocket-app-dev-loginUser
+  signupUser: ndvi-websocket-app-dev-signupUser
+  privateAPI: ndvi-websocket-app-dev-privateAPI
+  connect: ndvi-websocket-app-dev-connect
+  disconnect: ndvi-websocket-app-dev-disconnect
+  getNdviDates: ndvi-websocket-app-dev-getNdviDates
+  validateGeojson: ndvi-websocket-app-dev-validateGeojson
+  get_allimages: ndvi-websocket-app-dev-get_allimages
+  get_sentinelhub_token: ndvi-websocket-app-dev-get_sentinelhub_token
+  get_sentinelhub_statistics: ndvi-websocket-app-dev-get_sentinelhub_statistics
+  get_sentinelhub_image: ndvi-websocket-app-dev-get_sentinelhub_image
+  get_mongo_dates: ndvi-websocket-app-dev-get_mongo_dates
+  get_mongo_allimages: ndvi-websocket-app-dev-get_mongo_allimages
+  get_mongo_image: ndvi-websocket-app-dev-get_mongo_image</p>
 
   <br>
 </div>
