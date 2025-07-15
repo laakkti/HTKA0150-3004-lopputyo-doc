@@ -33,37 +33,11 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Node", url: "#_top", children: [
+          {title: "Runtime", url: "#_top", children: [
           ]},
           {title: "package.json", url: "#packagejson", children: [
           ]},
-          {title: "Express", url: "#express", children: [
-          ]},
-          {title: "Nodemon", url: "#nodemon", children: [
-          ]},
-          {title: "CORS", url: "#cors", children: [
-          ]},
-          {title: "@sentinel-hub/sentinelhub-js", url: "#sentinel-hubsentinelhub-js", children: [
-          ]},
-          {title: "Dotenv", url: "#dotenv", children: [
-          ]},
-          {title: "Morgan", url: "#morgan", children: [
-          ]},
-          {title: "jsonwebtoken", url: "#jsonwebtoken", children: [
-          ]},
-          {title: "@turf/turf", url: "#turfturf", children: [
-          ]},
-          {title: "Axios", url: "#axios", children: [
-          ]},
-          {title: "Mongoose", url: "#mongoose", children: [
-          ]},
-          {title: "mongoose-unique-validator", url: "#mongoose-unique-validator", children: [
-          ]},
-          {title: "Jimp", url: "#jimp", children: [
-          ]},
-          {title: "Node Cron", url: "#node-cron", children: [
-          ]},
-          {title: "bcrypt", url: "#bcrypt", children: [
+          {title: "Dependencies", url: "#dependencies", children: [
           ]},
         ];
 
@@ -82,80 +56,122 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <h3 id="node"><a href="https://nodejs.org/en">Node</a></h3>
-<p>Node.js is a JavaScript runtime environment that allows you to execute JavaScript code on the server-side. It provides the necessary runtime to run Express.js, which is a web application framework for Node.js. Express.js simplifies the process of building web applications and APIs in Node.js by providing a robust set of features and utilities.</p>
+    <h3 id="runtime">Runtime</h3>
+<ul>
+<li><a href="https://nodejs.org/">Node.js</a><br />
+  A JavaScript runtime built on Chrome's V8 engine for building fast and scalable network applications. It uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.</li>
+</ul>
 <h3 id="packagejson">package.json</h3>
 <pre><code>{
-  &quot;name&quot;: &quot;ndviworker&quot;,
+  &quot;name&quot;: &quot;ndvi-websocket-app&quot;,
   &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;NDVI images from sentinelhub API &quot;,
-  &quot;main&quot;: &quot;app.js&quot;,
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;node app.js&quot;,
-    &quot;dev&quot;: &quot;nodemon index.js&quot;
-  },
-  &quot;author&quot;: &quot;AA4598@student.jamk.fi&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;AA4598&quot;,
   &quot;license&quot;: &quot;ISC&quot;,
+  &quot;type&quot;: &quot;commonjs&quot;,
   &quot;dependencies&quot;: {
-    &quot;@sentinel-hub/sentinelhub-js&quot;: &quot;^0.4.7&quot;,
-    &quot;@turf/turf&quot;: &quot;^6.5.0&quot;,
-    &quot;axios&quot;: &quot;^1.6.8&quot;,
-    &quot;bcrypt&quot;: &quot;^5.1.1&quot;,
-    &quot;cors&quot;: &quot;^2.8.5&quot;,
-    &quot;dotenv&quot;: &quot;^16.4.5&quot;,
-    &quot;express&quot;: &quot;^4.19.2&quot;,
+    &quot;@aws-sdk/client-apigatewaymanagementapi&quot;: &quot;^3.787.0&quot;,
+    &quot;@mapbox/geojsonhint&quot;: &quot;^3.3.0&quot;,
+    &quot;@sentinel-hub/sentinelhub-js&quot;: &quot;^0.8.11&quot;,
+    &quot;@turf/turf&quot;: &quot;^7.2.0&quot;,
+    &quot;aws-sdk&quot;: &quot;^2.1692.0&quot;,
+    &quot;dotenv&quot;: &quot;^16.5.0&quot;,
     &quot;jimp&quot;: &quot;^0.22.12&quot;,
     &quot;jsonwebtoken&quot;: &quot;^9.0.2&quot;,
-    &quot;mongoose&quot;: &quot;^8.3.1&quot;,
-    &quot;mongoose-unique-validator&quot;: &quot;^5.0.0&quot;,
-    &quot;morgan&quot;: &quot;^1.10.0&quot;,
-    &quot;node-cron&quot;: &quot;^3.0.3&quot;,
-    &quot;nodemon&quot;: &quot;^3.1.0&quot;
+    &quot;jwks-rsa&quot;: &quot;^3.2.0&quot;,
+    &quot;mongoose&quot;: &quot;^8.14.2&quot;
   }
 }
 </code></pre>
-<h3 id="express"><a href="https://www.npmjs.com/package/express">Express</a></h3>
-<p>A fast, unopinionated, minimalist web framework for Node.js, used for building web applications and APIs.</p>
-<p><code>npm i express</code></p>
-<h3 id="nodemon"><a href="https://www.npmjs.com/package/nodemon">Nodemon</a></h3>
-<p>A utility that automatically restarts your Node.js application when file changes are detected, making development easier.</p>
-<p><code>npm i nodemon</code></p>
-<h3 id="cors"><a href="https://www.npmjs.com/package/cors">CORS</a></h3>
-<p>A middleware for Express to enable Cross-Origin Resource Sharing (CORS), allowing your API to be accessed from different domains.</p>
-<p><code>npm i cors</code></p>
-<h3 id="sentinel-hubsentinelhub-js"><a href="https://www.npmjs.com/package/@sentinel-hub/sentinelhub-js">@sentinel-hub/sentinelhub-js</a></h3>
-<p>A JavaScript library to access Sentinel Hub services, enabling you to work with satellite imagery and data from Sentinel satellites.</p>
-<p><code>npm i @sentinel-hub/sentinelhub-js</code></p>
-<h3 id="dotenv"><a href="https://www.npmjs.com/package/dotenv">Dotenv</a></h3>
-<p>A module that loads environment variables from a <code>.env</code> file into <code>process.env</code>, useful for managing configuration settings in a project.</p>
-<p><code>npm i dotenv</code></p>
-<h3 id="morgan"><a href="https://www.npmjs.com/package/morgan">Morgan</a></h3>
-<p>An HTTP request logger middleware for Node.js, useful for logging details of incoming requests for debugging and monitoring.</p>
-<p><code>npm i morgan</code></p>
-<h3 id="jsonwebtoken"><a href="https://www.npmjs.com/package/jsonwebtoken">jsonwebtoken</a></h3>
-<p>A library to create and verify JSON Web Tokens (JWT), commonly used for authentication and secure data exchange.</p>
-<p><code>npm i jsonwebtoken</code></p>
-<h3 id="turfturf"><a href="https://www.npmjs.com/package/@turf/turf">@turf/turf</a></h3>
-<p>A JavaScript library for advanced geospatial analysis, providing various functions for processing and analyzing geographic data.</p>
-<p><code>npm i @turf/turf</code></p>
-<h3 id="axios"><a href="https://www.npmjs.com/package/axios">Axios</a></h3>
-<p>A promise-based HTTP client for the browser and Node.js, used for making HTTP requests to interact with APIs.</p>
-<p><code>npm i axios</code></p>
-<h3 id="mongoose"><a href="https://www.npmjs.com/package/mongoose">Mongoose</a></h3>
-<p>An Object Data Modeling (ODM) library for MongoDB and Node.js, providing a straightforward, schema-based solution to model your application data.</p>
-<p><code>npm i mongoose</code></p>
-<h3 id="mongoose-unique-validator"><a href="https://www.npmjs.com/package/mongoose-unique-validator">mongoose-unique-validator</a></h3>
-<p>A plugin for Mongoose that provides unique validation for schema fields, ensuring no duplicate values are stored in the database.</p>
-<p><code>npm i mongoose-unique-validator</code></p>
-<h3 id="jimp"><a href="https://www.npmjs.com/package/jimp">Jimp</a></h3>
-<p>A library for image processing in Node.js, offering various functionalities like resizing, cropping, and image manipulation.</p>
-<p><code>npm i jimp</code></p>
-<h3 id="node-cron"><a href="https://www.npmjs.com/package/node-cron">Node Cron</a></h3>
-<p>A task scheduler for Node.js, allowing you to run scheduled tasks using Cron syntax.</p>
-<p><code>npm i node-cron</code></p>
-<h3 id="bcrypt"><a href="https://www.npmjs.com/package/bcrypt">bcrypt</a></h3>
-<p>A library for hashing passwords in Node.js, providing secure methods to store and verify passwords.</p>
-<p><code>npm i bcrypt</code></p>
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+<li>
+<p><a href="https://www.npmjs.com/package/@aws-sdk/client-apigatewaymanagementapi"><code>@aws-sdk/client-apigatewaymanagementapi</code></a><br />
+  AWS SDK v3 client for managing WebSocket connections via the API Gateway Management API.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/@mapbox/geojsonhint"><code>@mapbox/geojsonhint</code></a><br />
+  Validates GeoJSON objects and returns descriptive error messages if the structure is invalid.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/@sentinel-hub/sentinelhub-js"><code>@sentinel-hub/sentinelhub-js</code></a><br />
+  JavaScript library for interacting with Sentinel Hub APIs for Earth Observation data access and processing.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/@turf/turf"><code>@turf/turf</code></a><br />
+  Advanced geospatial analysis library written in JavaScript for processing GeoJSON data.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/aws-sdk"><code>aws-sdk</code></a><br />
+  Official AWS SDK for JavaScript (v2) that allows interaction with AWS services.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/dotenv"><code>dotenv</code></a><br />
+  Loads environment variables from a <code>.env</code> file into <code>process.env</code>.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/jimp"><code>jimp</code></a><br />
+  Image processing library written entirely in JavaScript with no native dependencies.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/jsonwebtoken"><code>jsonwebtoken</code></a><br />
+  Implementation of JSON Web Tokens (JWT) for authentication and authorization in Node.js.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/jwks-rsa"><code>jwks-rsa</code></a><br />
+  A library to retrieve RSA signing keys from a JWKS (JSON Web Key Set) endpoint.</p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/mongoose"><code>mongoose</code></a><br />
+  MongoDB object modeling tool designed to work in an asynchronous environment.</p>
+</li>
+</ul>
+<!--
+### [@sentinel-hub/sentinelhub-js](https://www.npmjs.com/package/@sentinel-hub/sentinelhub-js)  
+
+A JavaScript library to access Sentinel Hub services, enabling you to work with satellite imagery and data from Sentinel satellites.
+
+`npm i @sentinel-hub/sentinelhub-js`
+
+### [Dotenv](https://www.npmjs.com/package/dotenv)  
+
+A module that loads environment variables from a `.env` file into `process.env`, useful for managing configuration settings in a project.
+
+`npm i dotenv`
+
+### [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)  
+
+A library to create and verify JSON Web Tokens (JWT), commonly used for authentication and secure data exchange.
+
+`npm i jsonwebtoken`
+
+### [@turf/turf](https://www.npmjs.com/package/@turf/turf)  
+
+A JavaScript library for advanced geospatial analysis, providing various functions for processing and analyzing geographic data.
+
+`npm i @turf/turf`
+
+### [Axios](https://www.npmjs.com/package/axios)  
+
+A promise-based HTTP client for the browser and Node.js, used for making HTTP requests to interact with APIs.
+Actually sentinelhub-package includes axios, which is used for another requests too.
+
+`npm i axios`
+
+### [Mongoose](https://www.npmjs.com/package/mongoose)  
+
+An Object Data Modeling (ODM) library for MongoDB and Node.js, providing a straightforward, schema-based solution to model your application data.
+
+`npm i mongoose`
+
+### [Jimp](https://www.npmjs.com/package/jimp)  
+
+A library for image processing in Node.js, offering various functionalities like resizing, cropping, and image manipulation.
+
+`npm i jimp`
+-->
 
   <br>
 </div>

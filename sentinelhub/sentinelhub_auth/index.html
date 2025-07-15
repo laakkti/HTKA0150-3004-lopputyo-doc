@@ -61,18 +61,6 @@ instanceId = "8c9fd4ff-f38d-42ef-aad2-0f0a2d0d7bfa"
     end
 </div>
 <p>When request for token from sentinelhub it will be expired in 60 min, so it need to be asked for new one, so expiration need to be checked for a while on serverside code.</p>
-<p><strong>request for token</strong></p>
-<p><code>../utils/authenticate.js</code></p>
-<p><strong>request for the time left for the expiration</strong></p>
-<p><code>../utils/checkToken.js</code></p>
-<p><strong>var authToken</strong> </p>
-<p>Is holding the token to sentinelHub. 
-It is a global variable, the scope in the code of ndvi_cotroller.js</p>
-<p><strong>middleware can be used for authetication process just for specifig route</strong></p>
-<p>ndvi-routes.js</p>
-<pre><code>const middleware = require('../middlewares/sentinelhub_token')
-router.post('/list', middleware.checkToken,ndviControllers.list);
-</code></pre>
 <br/>
 </div>
 <footer class="container-fluid wm-page-content">

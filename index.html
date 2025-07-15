@@ -35,7 +35,9 @@
       var is_top_frame = (window === window.parent);
         
         var pageToc = [
-          {title: "NDVI (Normalized Difference Vegetation Index)", url: "#_top", children: [
+          {title: "About this documentation", url: "#_top", children: [
+          ]},
+          {title: "NDVI (Normalized Difference Vegetation Index)", url: "#ndvi-normalized-difference-vegetation-index", children: [
           ]},
           {title: "AWS-serverless API for NDVI-satellite images and statistics from Sentinel-hub services", url: "#aws-serverless-api-for-ndvi-satellite-images-and-statistics-from-sentinel-hub-services", children: [
           ]},
@@ -106,59 +108,6 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <ul class="wm-toctree">
         <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">Introduction</a>
 </li>
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Using the service</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/frontend/" class="wm-article-link wm-toc-text">Client example</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/overview/" class="wm-article-link wm-toc-text">Overview</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Authentication</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="client/registration/" class="wm-article-link wm-toc-text">Sign up</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="client/login/" class="wm-article-link wm-toc-text">Log in</a>
-</li>
-  </ul>
-</li>
-
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/selecting_area/" class="wm-article-link wm-toc-text">Inserting the geometry of the area of interest</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/get_data/" class="wm-article-link wm-toc-text">Getting the NDVI data</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/selecting_year/" class="wm-article-link wm-toc-text">Selecting year of NDVI dates</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/selecting_date/" class="wm-article-link wm-toc-text">Selecting date of NDVI data</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/elements.md" class="wm-article-link wm-toc-text">Display elements</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Views</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="client/chart/" class="wm-article-link wm-toc-text">Chart</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="client/statistics/" class="wm-article-link wm-toc-text">Statistics</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="client/onmap/" class="wm-article-link wm-toc-text">On map</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="client/location/" class="wm-article-link wm-toc-text">Location</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="client/film/" class="wm-article-link wm-toc-text">Film</a>
-</li>
-  </ul>
-</li>
-
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/auto_play/" class="wm-article-link wm-toc-text">Play mode</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="client/about/" class="wm-article-link wm-toc-text">About</a>
-</li>
-  </ul>
-</li>
-
         <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Endpoints</span>
 </li>
 <li class="wm-toc-li-nested collapse">
@@ -169,7 +118,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
 <li class="wm-toc-li-nested collapse">
   <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="auth/cognito/" class="wm-article-link wm-toc-text">overview</a>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="auth/cognito/" class="wm-article-link wm-toc-text">authentication</a>
 </li>
       <li class="wm-toc-li wm-toc-lev3 "><a href="auth/signup/" class="wm-article-link wm-toc-text">signup</a>
 </li>
@@ -241,12 +190,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
 <li class="wm-toc-li-nested collapse">
   <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="database/overview/" class="wm-article-link wm-toc-text">Overview</a>
-</li>
       <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">MongoDB</span>
 </li>
 <li class="wm-toc-li-nested collapse">
   <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="database/overview/" class="wm-article-link wm-toc-text">Overview</a>
+</li>
       <li class="wm-toc-li wm-toc-lev3 "><a href="env/" class="wm-article-link wm-toc-text">Environment variable</a>
 </li>
       <li class="wm-toc-li wm-toc-lev3 wm-toc-opener"><span class="wm-toc-text">Models</span>
@@ -272,10 +221,59 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="libraries/libraries/" class="wm-article-link wm-toc-text">Libraries</a>
 </li>
-        <li class="wm-toc-li wm-toc-lev1 "><a href="deployment/deployment/" class="wm-article-link wm-toc-text">Deployment</a>
-</li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="development/development/" class="wm-article-link wm-toc-text">Development</a>
 </li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="deployment/deployment/" class="wm-article-link wm-toc-text">Deployment</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Using the service/client example</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="client/overview/" class="wm-article-link wm-toc-text">Overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Authentication</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="client/registration/" class="wm-article-link wm-toc-text">Sign up</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="client/login/" class="wm-article-link wm-toc-text">Log in</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 "><a href="client/selecting_area/" class="wm-article-link wm-toc-text">Inserting the geometry of the area of interest</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="client/get_data/" class="wm-article-link wm-toc-text">Getting the NDVI data</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="client/selecting_year/" class="wm-article-link wm-toc-text">Selecting year of NDVI dates</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="client/selecting_date/" class="wm-article-link wm-toc-text">Selecting date of NDVI data</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Views</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="client/chart/" class="wm-article-link wm-toc-text">Chart</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="client/statistics/" class="wm-article-link wm-toc-text">Statistics</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="client/onmap/" class="wm-article-link wm-toc-text">On map</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="client/location/" class="wm-article-link wm-toc-text">Location</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="client/film/" class="wm-article-link wm-toc-text">Film</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 "><a href="client/auto_play/" class="wm-article-link wm-toc-text">Play mode</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="client/about/" class="wm-article-link wm-toc-text">About</a>
+</li>
+  </ul>
+</li>
+
   </ul>
 </nav>
 
@@ -288,7 +286,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <h3 id="ndvi-normalized-difference-vegetation-index">NDVI (Normalized Difference Vegetation Index)</h3>
+    <h3 id="about-this-documentation">About this documentation</h3>
+<!--This documentation is about AWS-serverless backend API for NDVI-mapimages. 
+In the end of documentation there is also short frontend client-app overview of using the backend in practise, the technical issues for frontend are not documented because this documentation is for backend service assignment.-->
+
+<p>This documentation describes an AWS serverless backend API for NDVI map images.
+At the end of the documentation, there is also a brief overview of a frontend client app demonstrating how the backend is used in practice.
+Technical details of the frontend are not included, as this documentation focuses specifically on the backend service assignment.</p>
+<h3 id="ndvi-normalized-difference-vegetation-index">NDVI (Normalized Difference Vegetation Index)</h3>
 <p>The well known and widely used NDVI is a simple, but effective index for quantifying green vegetation. It normalizes green leaf scattering in Near Infra-red wavelengths with chlorophyll absorption in red wavelengths.
 The value range of the NDVI is -1 to 1. Negative values of NDVI (values approaching -1) correspond to water. Values close to zero (-0.1 to 0.1) generally correspond to barren areas of rock, sand, or snow. Low, positive values represent shrub and grassland (approximately 0.2 to 0.4), while high values indicate temperate and tropical rainforests (values approaching 1). It is a good proxy for live green vegetation.</p>
 <p><img src="img/ndvi.jpg" alt="image 1" width="600"/></p>
@@ -299,7 +304,7 @@ So the e.g. farmers and agriculture peoples can see the growing situation of the
 <h4 id="why-sentinel-hub">Why sentinel-hub</h4>
 <p><a href="https://medium.com/sentinel-hub/tk-why-its-time-to-stop-processing-satellite-imagery-on-your-laptop-a09dbf8c72c0/" target="_blank">Why it’s time to stop processing satellite imagery on your laptop</a></p>
 <h3 id="idea">Idea</h3>
-<p>The idea of the topic for this exercise is based on a previously implemented the following MERN-fullstack</p>
+<p>The idea of the topic for this assignment is based on a previously implemented the following MERN-fullstack</p>
 <p>frontend: <br />
 <a href="https://laakkti.github.io/ytsp0300-3004/" target="_blank" rel="noopener noreferrer">https://laakkti.github.io/ytsp0300-3004/</a></p>
 <p>backend: <br />
@@ -321,8 +326,6 @@ So the e.g. farmers and agriculture peoples can see the growing situation of the
 <p>accuracy of geospatial operations (e.g., containment, intersection)</p>
 </li>
 </ul>
-<p>The implementation of the frontend application is not described in detail in this document, only how it is used in practice. <br />
-This document focuses on describing the AWS serverless backend implementation.</p>
 
   <br>
 </div>
@@ -335,5 +338,5 @@ This document focuses on describing the AWS serverless backend implementation.</
 </html>
 <!--
 MkDocs version : 1.6.0
-Build Date UTC : 2025-06-17 20:13:45.367078+00:00
+Build Date UTC : 2025-07-15 23:01:34.635365+00:00
 -->

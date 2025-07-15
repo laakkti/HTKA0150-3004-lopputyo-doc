@@ -33,10 +33,6 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "AWS-serverless", url: "#_top", children: [
-          ]},
-          {title: "Frontend", url: "#frontend", children: [
-          ]},
         ];
 
     </script>
@@ -54,10 +50,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <a name="_top"></a>
     
 
-    <h2 id="aws-serverless">AWS-serverless</h2>
+    <h4 id="aws-serverless">AWS-serverless</h4>
+<p>To deploy the application, run the following command:</p>
 <pre><code>sls deploy
 </code></pre>
-<p>getting the endpoints</p>
+<p>This command deploys the application to the serverless infrastructure, and the endpoint URLs will be returned upon successful deployment.</p>
 <pre><code>endpoints:
   POST - https://qz8q452n0a.execute-api.eu-north-1.amazonaws.com/handler/getNdviImages
   POST - https://qz8q452n0a.execute-api.eu-north-1.amazonaws.com/sentinelhub/get_token
@@ -80,10 +77,6 @@ functions:
   get_mongo_allimages: ndvi-websocket-app-dev-get_mongo_allimages (59 MB)
   get_mongo_image: ndvi-websocket-app-dev-get_mongo_image (59 MB)
 </code></pre>
-<h2 id="frontend">Frontend</h2>
-<pre><code>npm run build
-</code></pre>
-<p>As the result folder named <code>Dist</code> is created, folder contains working code, which can be deployed to any web-service you like.</p>
 
   <br>
 </div>

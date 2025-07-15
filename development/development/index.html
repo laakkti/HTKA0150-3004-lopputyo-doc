@@ -34,9 +34,6 @@
         
         var pageToc = [
           {title: "AWS-serverless", url: "#_top", children: [
-              {title: "Developing", url: "#developing" },
-          ]},
-          {title: "Frontend", url: "#frontend", children: [
               {title: "Tools and services used for this project", url: "#tools-and-services-used-for-this-project" },
           ]},
         ];
@@ -57,42 +54,202 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h2 id="aws-serverless">AWS-serverless</h2>
+<h4 id="serverlessyml">serverless.yml</h4>
+<p>serverless.yml tells the Serverless Framework how to deploy your app.</p>
+<pre><code>service: ndvi-websocket-app
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-north-1
+  environment: # ympäristömuuttujat
+    user_pool_id: { Ref: UserPool } # cogniton user pool
+    client_id: { Ref: UserClient } # cogniton client id
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - execute-api:ManageConnections # websocketia varten
+            - ssm:PutParameter # sentinelHub tokenin tallennus smm-storeen
+            - ssm:GetParameter # sentinelHub tokenin luku ssm-storesta             
+          Resource:
+            - arn:aws:execute-api:${self:provider.region}:*:*/@connections/*
+            - arn:aws:ssm:${self:provider.region}:${aws:accountId}:parameter/* 
+        - Effect: Allow
+          Action:
+          - cognito-idp:AdminCreateUser
+          - cognito-idp:AdminSetUserPassword
+          - cognito-idp:AdminInitiateAuth
+          Resource: &quot;*&quot;
+        - Effect: Allow
+          Action:
+            - cognito-idp:AdminGetUser
+          Resource: arn:aws:cognito-idp:eu-north-1:440744232771:userpool/eu-north-1_ShT10PSUI
+
+
+  httpApi: # httpApi-asetukset
+    cors: true
+    authorizers:
+      PrivateAuthorizer: # Cogniton authorizerin nimi
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl:
+          Fn::Join:
+            - &quot;&quot;
+            - - &quot;https://cognito-idp.&quot;
+              - &quot;${opt:region, self:provider.region}&quot;
+              - &quot;.amazonaws.com/&quot;
+              - Ref: UserPool
+        audience:
+          - Ref: UserClient
+
+functions:
+  loginUser: # sisäänkirjautuminen
+    handler: user/login.handler
+    events:
+      - httpApi:
+          path: /user/login
+          method: post
+
+  signupUser: # rekisteröityminen eli tunnareiden luonti
+    handler: user/signup.handler
+    events:
+      - httpApi:
+          path: /user/signup
+          method: post
+
+  privateAPI: # suojattu funktio ja reitti
+    handler: user/private.handler
+    events:
+      - httpApi:
+          path: /user/private
+          method: post
+          authorizer: PrivateAuthorizer # suojaus
+
+  connect:
+    handler: websocket/connect.handler
+    events:
+      - websocket:
+          route: $connect          
+
+  disconnect:
+    handler: websocket/disconnect.handler
+    events:
+      - websocket:
+          route: $disconnect
+
+  getNdviDates: # websocket
+    handler: websocket/getNdviDates.handler
+    timeout: 240
+    events:
+      - websocket:
+          route: getNdviDates
+
+  validateGeojson:
+    handler: NDVI/lambda/validateGeojson.handler
+    events:
+      - httpApi:
+          path: /validategeojson
+          method: post
+
+  get_allimages:
+    handler: NDVI/lambda/getimages.handler
+    events:
+      - httpApi:
+          path: /ndvi/getimages
+          method: post
+          authorizer: PrivateAuthorizer # suojaus
+
+  # TESTIT/requests
+  get_sentinelhub_token:
+    handler: sentinelhub/lambda/get_token.handler
+    events:
+    - httpApi:
+        path: /sentinelhub/get_token
+        method: post
+
+  get_sentinelhub_statistics:
+    handler: sentinelhub/lambda/get_statistics.handler
+    timeout: 60
+    events:
+      - httpApi:
+          path: /sentinelhub/get_statistics
+          method: post
+
+  get_sentinelhub_image:
+    handler: sentinelhub/lambda/get_image.handler
+    timeout: 30
+    events:
+      - httpApi:
+          path: /sentinelhub/getimage
+          method: post
+
+  get_mongo_dates:
+    handler: mongo/lambda/getdates.handler
+    events:
+      - httpApi:
+          path: /mongo/getdates
+          method: post
+
+  get_mongo_allimages:
+    handler: mongo/lambda/getimages.handler
+    events:
+      - httpApi:
+          path: /mongo/getimages
+          method: post
+
+  get_mongo_image:
+    handler: mongo/lambda/get_image.handler
+    events:
+      - httpApi:
+          path: /mongo/getimage
+          method: post
+
+resources: # resurssit eli palvelut oletuspalveluiden lisäksi
+  Resources:
+    UserPool: # cognito userpool
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: serverless-auth-pool
+        Schema: # käyttäjän tietojen skeema cognitossa. Tässä pelkkä email, ei enää
+          - Name: email
+            Required: true
+            Mutable: true          
+          - Name: name
+            AttributeDataType: String
+            Mutable: true
+            Required: false
+
+        Policies:
+          PasswordPolicy: # salasanan ominaisuudet
+            MinimumLength: 6
+        AutoVerifiedAttributes: [&quot;email&quot;] # email validoidaan
+
+    UserClient: # cognito userpoolin client
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: user-pool-ui
+        GenerateSecret: false
+        UserPoolId: { Ref: UserPool }
+        AccessTokenValidity: 5 # token validi 5 tuntia
+        IdTokenValidity: 5
+        ExplicitAuthFlows:
+          - &quot;ADMIN_NO_SRP_AUTH&quot; # tavallinen authorisaatio emaililla ja salasanalla
+
+</code></pre>
 <h4 id="source-code">Source code:</h4>
-<p><a href="https://gitlab.labranet.jamk.fi/AA4598/ytsp0200-3004" target="_blank">https://gitlab.labranet.jamk.fi/AA4598/ytsp0200-3004</a></p>
-<h4 id="release">Release:</h4>
-<p>The MERN-stack runs on the Azure web service as a container.</p>
-<p><a href="https://ndvidemo.azurewebsites.net/" target="_blank">https://ndvidemo.azurewebsites.net/</a></p>
-<h3 id="developing">Developing</h3>
-<p><strong>backend</strong></p>
-<p>Commands to get the development version from Gitlab to work on your computer</p>
-<p>The members of the project can copy the project to own computer with the command:</p>
-<p><code>git clone https://gitlab.labranet.jamk.fi/AA4598/ytsp0200-3004</code></p>
-<p>node_modules must be installed at the root of the backend with the command:</p>
-<p><code>nmp i</code>
-start the server from the root of the backend with the command:</p>
-<p><code>nmp run dev</code> (when nodemon is installed)</p>
-<p>the application starts at address </p>
-<p>http://localhost:5000/</p>
-<h2 id="frontend">Frontend</h2>
-<p><strong>frontend</strong></p>
-<p>The members of the project can copy the project to own computer with the command:</p>
-<p><code>git clone https://gitlab.labranet.jamk.fi/AA4598/ytsp0300-3004</code></p>
-<p>node_modules must be installed at the root of the frontend with the command:</p>
-<p><code>nmp i</code></p>
-<p>start the client from the front end with the command:</p>
-<p><code>nmp run dev</code> </p>
-<p>the application starts at the browser address </p>
-<p>http://localhost:5173/HTKA0150-3004-lopputyo-frontend/</p>
+<p><a href="https://github.com/laakkti/HTKA0150-3004-AWS-serverless/tree/main/AWS-lopputyo/backend" target="_blank">https://github.com/laakkti/HTKA0150-3004-AWS-serverless/tree/main/AWS-lopputyo/backend</a></p>
 <h3 id="tools-and-services-used-for-this-project">Tools and services used for this project</h3>
 <ul>
-<li>Jupyter Notebook for learning sentinel-hub services </li>
-<li>Sentinel-hub API for getting area of interest related data</li>
 <li>Visual Studio Code + extensions for programming </li>
-<li>Node/Edxpress/Mongoose for the base of the server </li>
-<li>MongoDb Atlas the storing of the data</li>
-<li>Azure Data Studio for data monitoring</li>
-<li>GitLab/Github/Azure DevOps for stroin the code in repositorys</li>
-<li>Docker Desktop for container</li>
+<li>AWS-serverless for backend for services</li>
+<li>Sentinel-hub API for getting area of interest related data</li>
+<li>MongoDb Atlas for storing of the data</li>
+<li>Github for storing the code in repositorys</li>
 </ul>
 
   <br>

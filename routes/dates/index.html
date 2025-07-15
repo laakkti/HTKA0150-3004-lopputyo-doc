@@ -189,15 +189,6 @@ TÄMÄ LIITTYY dates websocket kohtaan SIIRRÄÄ sinne!!! koska siellä vain oll
           route: getNdviDates
 </code></pre>
 <p>timeout is most important, depending of the size of the aoi (area of interenst) geometry, depending on timerange and traffic enough time is needed for the process.</p>
-<h6 id="tama-lahetetaan-fronendista-ja-funktio-on-getndvi">############################### tämä lähetetään fronendistä ja funktio on getNdvi...</h6>
-<p>on client</p>
-<p>const geoData = {
-    start_date: startDate,
-    end_date: endDate,
-    geometry: geoJson,
-  };
-socket.send(JSON.stringify({ action: "getNdviDates", data: geoData }));</p>
-<h6 id="_2"></h6>
 <table>
 <thead>
 <tr>
@@ -243,6 +234,13 @@ socket.send(JSON.stringify({ action: "getNdviDates", data: geoData }));</p>
     "end_date": "dateString"
 }
 </code></pre>
+<p><strong>on client</strong> <br/>
+const geoData = {
+    start_date: startDate,
+    end_date: endDate,
+    geometry: geoJson,
+  };
+socket.send(JSON.stringify({ <strong>action</strong>: "getNdviDates", data: geoData }));</p>
 <h2 id="response">Response</h2>
 <table>
 <thead>
